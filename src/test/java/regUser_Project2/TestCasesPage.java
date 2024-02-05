@@ -1,0 +1,37 @@
+package regUser_Project2;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
+
+import callingAutomationExercise.CallingAutoExercise;
+
+public class TestCasesPage extends CallingAutoExercise {
+	WebDriver driver;
+
+	public TestCasesPage(WebDriver ldriver)
+	{
+		driver=ldriver;
+		PageFactory.initElements(driver, this);
+	}
+
+	@FindBy(xpath="//button[text()='Test Cases']") WebElement testcases;
+	@FindBy(xpath="//h2[@class='title text-center']") WebElement verifytestcs;
+	@FindBy(xpath="//section[@id='form']/child::div/child::div") WebElement testcslist;
+
+	public void clickTestCasesButton()
+	{
+	testcases.click();
+	}
+
+	public void verifyTestCasesPage()
+	{
+		System.out.println(testcslist.getText());
+	if(verifytestcs.isDisplayed())
+	{
+		System.out.println("Test Cases page displayed successfully: Verified");
+	}
+		System.out.println("TEST CASE7 COMPLETED SUCCESSFULLY\n");
+	}
+}
