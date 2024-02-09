@@ -5,8 +5,36 @@
     <classes>
       <class name="callingAutomationExercise.CallingAutoExercise">
         <methods>
-          <include name="VerifyAutomationExerciseWebPage"/>
-          <include name="LaunchBrowser"/>
+          <include name="verifyScrollUpWithoutArrowTC26"/>
+          <include name="verifyAddressDetailsTC23"/>
+          <include name="verifyPlaceOrder2TC15"/>
+          <include name="verifyAddRecommendedItemsTC22"/>
+          <include name="verifyAllProductsTC8"/>
+          <include name="launchBrowser"/>
+          <include name="verifyHomeSubscriptionTC10"/>
+          <include name="verifySearchProductTC9"/>
+          <include name="verifyRemoveProductsTC17"/>
+          <include name="verifyAddProductsTC12"/>
+          <include name="closeBrowser"/>
+          <include name="verifyCartSubscriptionTC11"/>
+          <include name="verifyPlaceOrder3TC16"/>
+          <include name="verifyDownloadInvoiceTC24"/>
+          <include name="verifyAutomationExerciseWebPage"/>
+          <include name="verifyContactUsTC6"/>
+          <include name="verifyLogoutUserTC4"/>
+          <include name="verifyRegisterWithEmailTC5"/>
+          <include name="verifyProductQuantityTC13"/>
+          <include name="verifyLoginInvalidUserTC3"/>
+          <include name="verifyCategoryTC18"/>
+          <include name="verifyTestCasesTC7"/>
+          <include name="verifyScrollUpUsingArrowTC25"/>
+          <include name="verifyCartAfterLoginTC20"/>
+          <include name="exitBrowser"/>
+          <include name="verifyRegisterUserTC1"/>
+          <include name="verifyAddReviewTC21"/>
+          <include name="verifyLoginValidUserTC2"/>
+          <include name="verifyPlaceOrder1TC14"/>
+          <include name="verifyBrandTC19"/>
         </methods>
       </class> <!-- callingAutomationExercise.CallingAutoExercise -->
     </classes>

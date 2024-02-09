@@ -7,6 +7,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.testng.Assert;
 
 import callingAutomationExercise.CallingAutoExercise;
 
@@ -30,19 +31,13 @@ public class ViewCategory extends CallingAutoExercise {
 	{
 		home.click();
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
-		if(verifycategry.isDisplayed())
-		{
-			System.out.println("Category is displayed on leftside bar: Verified");
-		}
-		else
-		{
-			System.out.println("ALL PRODUCTS page is not visible: Failed");
-		}
+		Assert.assertTrue(verifycategry.isDisplayed());
+		System.out.println(verifycategry.getText()+" is visible: - Verified");
 	}
 	public void clickWomen()
 	{
 		women.click();
-		System.out.println("Clicked on women");
+		System.out.println("Clicked on 'Women' category");
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		js.executeScript("arguments[0].scrollIntoView();", dress);
 
@@ -54,14 +49,10 @@ public class ViewCategory extends CallingAutoExercise {
 	}
 	public void verifyHeadingDress()
 	{
-		if(vrfydresshd.isDisplayed())
-		{
-			System.out.println("Category page is displayed and 'WOMEN - DRESS PRODUCTS' is visible: Verified");
-		}
-		else
-		{
-			System.out.println("Category page is not displayed or 'WOMEN - DRESS PRODUCTS' is not visible: Failed");
-		}
+		String actualText=vrfydresshd.getText();
+		String expectedText ="WOMEN - DRESS PRODUCTS";
+		Assert.assertEquals(actualText, expectedText);
+		System.out.println("Category page is displayed and 'WOMEN - DRESS PRODUCTS' is visible: Verified");
 	}
 	public void clickMen()
 	{
@@ -76,14 +67,11 @@ public class ViewCategory extends CallingAutoExercise {
 	}
 	public void verifyHeadingJeans()
 	{
-		if(vrfyjeanshd.isDisplayed())
-		{
-			System.out.println("Category page is displayed and 'MEN - JEANS PRODUCTS' is visible: Verified");
-		}
-		else
-		{
-			System.out.println("Category page is not displayed or 'MEN - JEANS PRODUCTS' is not visible: Failed");
-		}
+		String actualText=vrfyjeanshd.getText();
+		String expectedText ="MEN - JEANS PRODUCTS";
+		Assert.assertEquals(actualText, expectedText);
+		System.out.println("Category page is displayed and 'MEN - JEANS PRODUCTS' is visible: Verified");
+
 		System.out.println("TEST CASE18 COMPLETED SUCCESSFULLY\n");
 	}
 }

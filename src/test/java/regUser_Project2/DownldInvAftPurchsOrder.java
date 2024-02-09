@@ -6,6 +6,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.testng.Assert;
 
 import callingAutomationExercise.CallingAutoExercise;
 
@@ -108,14 +109,8 @@ public class DownldInvAftPurchsOrder extends CallingAutoExercise {
 	}
 	public void verifyCartPage()
 	{
-		if(vrfycrtpg.isDisplayed())
-		{
-			System.out.println("Cart Page is displayed: Verified");
-		}
-		else
-		{
-			System.out.println("Cart Page is not displayed: Failed");
-		}
+		Assert.assertTrue(vrfycrtpg.isDisplayed());
+		System.out.println(vrfycrtpg.getText()+" is displayed: - Verified");
 	}
 	public void proceedToCheckout()
 	{
@@ -148,14 +143,11 @@ public class DownldInvAftPurchsOrder extends CallingAutoExercise {
 	public void verifyEnterAcctInformation()
 	{
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
-		if(stitle.isDisplayed())
-		{
-			System.out.println("Enter Account Information is visible: - Verified");
-		}
-		else
-		{
-			System.out.println("Enter Account Information is not visible: Failed");
-		}
+		String actualText=stitle.getText();
+		String expectedText ="ENTER ACCOUNT INFORMATION";
+		Assert.assertEquals(actualText, expectedText);
+		System.out.println(stitle.getText()+" is visible: Verified");
+
 	}
 	public void selectGenderTtl()
 	{
@@ -222,14 +214,10 @@ public class DownldInvAftPurchsOrder extends CallingAutoExercise {
 	{
 		crtaccnt.click();
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
-		if(verifyacctcrtd.isDisplayed())
-		{
-			System.out.println("Account Created! visible: - Verified");
-		}
-		else
-		{
-			System.out.println("Account Created is not visible: - Failed");
-		}
+		String actualText=verifyacctcrtd.getText();
+		String expectedText ="ACCOUNT CREATED!";
+		Assert.assertEquals(actualText, expectedText);
+		System.out.println(verifyacctcrtd.getText()+" is visible: Verified");
 	}
 
 	public void clickContinueBtn()
@@ -238,15 +226,8 @@ public class DownldInvAftPurchsOrder extends CallingAutoExercise {
 	}
 	public void verifyUserName()
 	{
-		if(textlogin.isDisplayed())
-		{
-			System.out.println("Logged in as username is visible: - Verified");
-
-		}
-		else
-		{
-			System.out.println("Logged in as username is not visible: - Failed");
-		}
+		Assert.assertTrue(textlogin.isDisplayed());
+		System.out.println(textlogin.getText()+" is visible: - Verified");
 	}
 //Click Cart button
 //Click Proceed to Checkout
@@ -307,15 +288,10 @@ public class DownldInvAftPurchsOrder extends CallingAutoExercise {
 	{
 		delete.click();
 
-		if(textdeleted.isDisplayed())
-		{
-			System.out.println("Account Deleted is visible: - Verified");
-
-		}
-		else
-		{
-			System.out.println("Account Deleted is not visible: - Failed");
-		}
+		String actualText=textdeleted.getText();
+		String expectedText ="ACCOUNT DELETED!";
+		Assert.assertEquals(actualText, expectedText);
+		System.out.println(textdeleted.getText()+" is displayed: Verified");
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
 		contbtn.click();
 		System.out.println("Continue Button Clicked");

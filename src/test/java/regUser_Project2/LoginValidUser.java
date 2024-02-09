@@ -6,6 +6,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.testng.Assert;
 
 import callingAutomationExercise.CallingAutoExercise;
 
@@ -24,22 +25,18 @@ public class LoginValidUser extends CallingAutoExercise{
 	@FindBy(xpath="//form[@action='/login']/child::input[@name='password']") WebElement pass2;
 	@FindBy(xpath="//button[text()='Login']") WebElement clklogin;
 	@FindBy(xpath="//div[@class='container']/child::div/child::div/following-sibling::div/child::div/child::ul/child::li[10]") WebElement vrfylogin;
-	@FindBy(xpath="//div[@class='container']/child::div/child::div/following-sibling::div/child::div/child::ul/child::li[5]") WebElement dltlogin;
+	@FindBy(xpath="//div[@class='container']/child::div/child::div/following-sibling::div/child::div/child::ul/child::li[5]/child::a") WebElement dltlogin;
 	@FindBy(xpath="//h2") WebElement textdeleted;
 
 	public void clickSignUpButton()
 	{
 		signup.click();
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
-		if(verifylogin.isDisplayed())
-		{
-			System.out.println("Login to your account is visible: - Verified");
-		}
-		else
-		{
-			System.out.println("Login to your account is not visible: - Verified");
-		}
 
+		String actualText=verifylogin.getText();
+		String expectedText ="Login to your account";
+		Assert.assertEquals(actualText, expectedText);
+		System.out.println("Login to your account is visible: - Verified");
 	}
 	public void enterEmail2(String mail2)
 	{
@@ -55,33 +52,25 @@ public class LoginValidUser extends CallingAutoExercise{
 	public void clickLoginButton()
 	{
 		clklogin.click();
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
 
 	}
 	public void verifyLogin()
 	{
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
-		if(vrfylogin.isDisplayed())
-		{
-			System.out.println("Logged in as username is visible: - Verified");
-		}
-		else
-		{
-			System.out.println("Logged in as username is not visible: - Failed");
-		}
+
+		Assert.assertTrue(vrfylogin.isDisplayed());
+		System.out.println(vrfylogin.getText()+" is visible: - Verified");
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
 	}
 	public void deleteLogin()
 	{
 		dltlogin.click();
-
-		if(textdeleted.isDisplayed())
-		{
-			System.out.println("Account Deleted is visible: - Verified");
-
-		}
-		else
-		{
-			System.out.println("Account Deleted is not visible: - Failed");
-		}
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
+		String actualText=textdeleted.getText();
+		String expectedText ="ACCOUNT DELETED!";
+		Assert.assertEquals(actualText, expectedText);
+		System.out.println("Account Deleted is visible: - Verified");
 		System.out.println("TEST CASE2 COMPLETED SUCCESSFULLY\n");
 	}
 

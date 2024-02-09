@@ -6,6 +6,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.testng.Assert;
 
 import callingAutomationExercise.CallingAutoExercise;
 
@@ -18,7 +19,7 @@ public class VerifyProdQtyInCrt extends CallingAutoExercise {
 		PageFactory.initElements(driver, this);
 	}
 
-	@FindBy(xpath="//ul[@class='nav navbar-nav']/child::li[1]/child::a") WebElement home; 
+	@FindBy(xpath="//ul[@class='nav navbar-nav']/child::li[1]/child::a") WebElement home;
 	@FindBy(xpath="//div[@id='cartModal']/following-sibling::div[3]/child::div/child::div[@class='choose']/child::ul/child::li/child::a/child::i") WebElement vwprdincrt;
 	@FindBy(xpath="//input[@id='quantity']") WebElement qty;
 	@FindBy(xpath="//button[@class='btn btn-default cart']") WebElement addtocartbtn;
@@ -40,14 +41,8 @@ public class VerifyProdQtyInCrt extends CallingAutoExercise {
 		String actualURL="https://automationexercise.com/product_details/3";
 		String currentURL=driver.getCurrentUrl();
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
-		if(currentURL.equalsIgnoreCase(actualURL))
-		{
-			System.out.println("Product detail is opened: Verified");
-		}
-		else
-		{
-			System.out.println("Product detail is not opened: Failed");
-		}
+		Assert.assertEquals(actualURL, currentURL);
+		System.out.println("Product detail is opened: Verified");
 	}
 	public void increaseQuantity()
 	{
@@ -69,14 +64,11 @@ public class VerifyProdQtyInCrt extends CallingAutoExercise {
 	}
 	public void verifyQuantity()
 	{
-		if(qtyincrt.getText().equalsIgnoreCase(num))
-		{
-			System.out.println("Product is displayed in cart page with exact quantity: Verified");
-		}
-		else
-		{
-			System.out.println("Product displayed in cart page does not match with exact quantity: Failed");
-		}
+		String actualQty=qtyincrt.getText();
+		String expectedQty=num;
+		Assert.assertEquals(actualQty, expectedQty);
+		System.out.println("Product is displayed in cart page with exact quantity: Verified");
+
 		System.out.println("TEST CASE13 COMPLETED SUCCESSFULLY\n");
 	}
 

@@ -6,6 +6,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.testng.Assert;
 
 import callingAutomationExercise.CallingAutoExercise;
 
@@ -31,14 +32,10 @@ public class VerifySubsCrtPg extends CallingAutoExercise {
 
 	public void verifyTextSubs()
 	{
-		if(substxt.isDisplayed())
-		{
-			System.out.println("Text 'SUBSCRIPTION' is displayed: Verified");
-		}
-		else
-		{
-			System.out.println("Text 'SUBSCRIPTION' is not displayed: Failed");
-		}
+		String actualText=substxt.getText();
+		String expectedText ="SUBSCRIPTION";
+		Assert.assertEquals(actualText, expectedText);
+		System.out.println("Text 'SUBSCRIPTION' is displayed: Verified");
 	}
 	public void enterEmail(String mail)
 	{
@@ -53,14 +50,11 @@ public class VerifySubsCrtPg extends CallingAutoExercise {
 	}
 	public void verifySuccessMessage()
 	{
-		if(successmsg.isDisplayed())
-		{
-			System.out.println(" 'You have been successfully subscribed!' is visible: Verified");
-		}
-		else
-		{
-			System.out.println(" 'You have been successfully subscribed!' is visible: Failed");
-		}
+		String actualText=successmsg.getText();
+		String expectedText ="You have been successfully subscribed!";
+		Assert.assertEquals(actualText, expectedText);
+		System.out.println(" 'You have been successfully subscribed!' is visible: Verified");
+
 		System.out.println("TEST CASE11 COMPLETED SUCCESSFULLY\n");
 	}
 

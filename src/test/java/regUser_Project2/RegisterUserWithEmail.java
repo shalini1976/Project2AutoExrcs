@@ -6,6 +6,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.testng.Assert;
 
 import callingAutomationExercise.CallingAutoExercise;
 
@@ -29,15 +30,11 @@ public class RegisterUserWithEmail extends CallingAutoExercise {
 	{
 		signup.click();
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
-		if(verifysignup.isDisplayed())
-		{
-			System.out.println("New User Signup! visible: - Verified");
-		}
-		else
-		{
-			System.out.println("New User Signup! not visible: Failed");
-		}
 
+		String actualText=verifysignup.getText();
+		String expectedText ="New User Signup!";
+		Assert.assertEquals(actualText, expectedText);
+		System.out.println("New User Signup! visible: - Verified");
 	}
 
 	public void enterName(String nm)
@@ -56,17 +53,10 @@ public class RegisterUserWithEmail extends CallingAutoExercise {
 		clksignup.click();
 
 	}
-	public void verifySignUpError() throws InterruptedException
+	public void verifySignUpError()
 	{
-		if(txterror.isDisplayed())
-		{
-			System.out.println("Error message is visible: - Verified");
-
-		}
-		else
-		{
-			System.out.println("Error message is not visible: - Failed");
-		}
+		Assert.assertTrue(txterror.isDisplayed());
+		System.out.println("Error message is visible: - Verified");
 		System.out.println("TEST CASE5 COMPLETED SUCCESSFULLY\n");
 	}
 

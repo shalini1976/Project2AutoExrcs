@@ -3,6 +3,9 @@ package callingAutomationExercise;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
+import org.testng.annotations.AfterSuite;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Test;
 
@@ -38,7 +41,7 @@ public class CallingAutoExercise {
 WebDriver driver;
 
 	@BeforeSuite
-	public void LaunchBrowser() throws InterruptedException
+	public void launchBrowser() throws InterruptedException
 	{
 		WebDriverManager.chromedriver().setup();
 		driver=new ChromeDriver();
@@ -47,50 +50,24 @@ WebDriver driver;
 		driver.get("https://automationexercise.com");
 		Thread.sleep(2000);
 	}
-	@Test
-	public void VerifyAutomationExerciseWebPage() throws InterruptedException
+	@BeforeMethod
+	public void verifyAutomationExerciseWebPage()
 	{
 		//Verifying Home Page
 		String actualTitle=driver.getTitle();
 		String expectedTitle ="Automation Exercise";
 		Assert.assertEquals(actualTitle, expectedTitle);
 		System.out.println("Home Page displayed successfully");
-
-		//Automating Test Cases
-
-
-		RegisterUser reg_user=new RegisterUser(driver);//TC1
-		LoginValidUser login_vld_user=new LoginValidUser(driver);//TC2
-		LoginInvalidUser login_invld_user=new LoginInvalidUser(driver);//TC3
-		LogoutUser logout_user =new LogoutUser(driver);//TC4
-		RegisterUserWithEmail reg_usr_wth_email =new RegisterUserWithEmail(driver);//TC5
-		ContactUs cntus=new ContactUs(driver);//TC6
-		TestCasesPage tstcspg =new TestCasesPage(driver);//TC7
-		VerifyAllProductPage vprodpg=new VerifyAllProductPage(driver);//TC8
-		SearchProduct srchprd =new SearchProduct(driver);//TC9
-		VerifySubsHmPg vsubshmpg=new VerifySubsHmPg(driver);//TC10
-		VerifySubsCrtPg vsubscrtpg =new VerifySubsCrtPg(driver);//TC11
-		AddProductsInCart adprdcrt=new AddProductsInCart(driver);//TC12
-		VerifyProdQtyInCrt vrfyprodqincrt=new VerifyProdQtyInCrt(driver);//TC13
-		PlaceOrderRegWhlChkOut plcordwhlchkot=new PlaceOrderRegWhlChkOut(driver); //TC14
-		PlaceOrderRegBefChkOut plcordbefchkot =new PlaceOrderRegBefChkOut(driver); //TC15
-		PlaceOrderLoginBefChkOut plcordloginbefchkot=new PlaceOrderLoginBefChkOut(driver); //TC16
-		RemoveProdsFromCart rmvprdcrt=new RemoveProdsFromCart(driver);//TC17
-		ViewCategory vwctgry =new ViewCategory(driver);//TC18
-		ViewBrand vwbrnd=new ViewBrand(driver);//TC19
-		SearchProdsVerfyCartAfterLogin srchprodvrfyaftlogin=new SearchProdsVerfyCartAfterLogin(driver); //TC20
-		AddReview adrev=new AddReview(driver);//TC21
-		AddToCartRecommended adcrtrecom=new AddToCartRecommended(driver);//TC22
-		VerifyAddrDetInChkOut vrfyaddrinchkot=new VerifyAddrDetInChkOut(driver);//TC23
-		DownldInvAftPurchsOrder dnldinvprchord=new DownldInvAftPurchsOrder(driver);//TC24
-		VerifyScrollUpDownWithArrow vscrlwitharr=new VerifyScrollUpDownWithArrow(driver);//TC25
-		VerifyScrollUpDownWithoutArrow vscrlwoutarr =new VerifyScrollUpDownWithoutArrow(driver);//TC26
-		
-		
+	}
+	@Test//(priority=1)
+	public void verifyRegisterUserTC1() 
+	{
 		//Test Case1
+		RegisterUser reg_user=new RegisterUser(driver);
+		
 		reg_user.clickSignUpButton();
-		reg_user.enterName("Mithilesh");
-		reg_user.enterEmail("mithi@yahoo.com");
+		reg_user.enterName("Sahiita");
+		reg_user.enterEmail("sahiya@yahoo.com");
 		reg_user.submitSignUp();
 		reg_user.verifyEnterAccountInformation();
 
@@ -101,7 +78,7 @@ WebDriver driver;
 		reg_user.selectYear();
 		reg_user.selectCheckbox1();
 		reg_user.selectCheckbox2();
-		reg_user.enterFName("Mithilesh");
+		reg_user.enterFName("Sahita");
 		reg_user.enterLName("S");
 		reg_user.enterAddress1("Akshayanagar");
 		reg_user.enterAddress2("Classic Layout");
@@ -115,25 +92,39 @@ WebDriver driver;
 		reg_user.clickContinueButton();
 		reg_user.verifyUserName();
 		reg_user.deleteAccount();
-	
+	}
+	@Test(priority=2)
+	public void verifyLoginValidUserTC2() 
+	{
 		//Test Case2
+		LoginValidUser login_vld_user=new LoginValidUser(driver);
+		
 		login_vld_user.clickSignUpButton();
 		login_vld_user.enterEmail2("paavni@yahoo.com");
 		login_vld_user.enterPassword("passwd");
 		login_vld_user.clickLoginButton();
 		login_vld_user.verifyLogin();
 		login_vld_user.deleteLogin();
+	}
 	
-		
+	@Test(priority=3)
+	public void verifyLoginInvalidUserTC3() 
+	{
 		//Test Case3
+		LoginInvalidUser login_invld_user=new LoginInvalidUser(driver);		
 		
 		login_invld_user.clickSignUpButton();
 		login_invld_user.enterEmail3("xyz@gmail.com");
 		login_invld_user.enterPassword("wordpass");
 		login_invld_user.clickLoginButton();
 		login_invld_user.verifyLoginError();
-	
+	}
+	@Test(priority=4)
+	public void verifyLogoutUserTC4() 
+	{
 		//Test Case4
+		LogoutUser logout_user =new LogoutUser(driver);				
+		
 		logout_user.clickSignUpButton();
 		logout_user.enterEmail2("michelle@gmail.com");
 		logout_user.enterPassword("passwd");
@@ -141,17 +132,26 @@ WebDriver driver;
 		logout_user.verifyLogin();
 		logout_user.clickLogoutButton();
 		logout_user.verifyLoginPage();
-		
-		
+	}
+	@Test(priority=5)
+	public void verifyRegisterWithEmailTC5() 
+	{
 		//Test Case5
+		RegisterUserWithEmail reg_usr_wth_email =new RegisterUserWithEmail(driver);		
+		
 		reg_usr_wth_email.clickSignUpButton();
 		reg_usr_wth_email.enterName("Michelle");
 		reg_usr_wth_email.enterEmail("michelle@gmail.com");
 		reg_usr_wth_email.submitSignUp();
 		reg_usr_wth_email.verifySignUpError();
+	}
 		
-		
+	@Test(priority=6)
+	public void verifyContactUsTC6() 
+	{
 		//Test Case6
+		ContactUs cntus=new ContactUs(driver);	
+		
 		cntus.clickContactUs();
 		cntus.verifyGetInTouch();
 		cntus.enterName("Nyonika");
@@ -164,41 +164,67 @@ WebDriver driver;
 		cntus.verifySuccessMessage();
 		cntus.clickHome();
 		cntus.verifyHome();
-
+	}
+	@Test(priority=7)
+	public void verifyTestCasesTC7() 
+	{
 		//Test Case7
+		TestCasesPage tstcspg =new TestCasesPage(driver);	
+		
 		tstcspg.clickTestCasesButton();
 		tstcspg.verifyTestCasesPage();
-	
-
+	}
+	@Test(priority=8)
+	public void verifyAllProductsTC8() 
+	{	
 		//Test Case8
+		VerifyAllProductPage vprodpg=new VerifyAllProductPage(driver);	
+		
 		vprodpg.clickProducts();
 		vprodpg.verifyList();
 		vprodpg.viewProduct();
-		
-		
+	}	
+	@Test(priority=9)
+	public void verifySearchProductTC9() 
+	{
 		//Test Case9
+		SearchProduct srchprd =new SearchProduct(driver);
+			
 		srchprd.clickProducts();
 		srchprd.enterItemInSearchbox("dress");
 		srchprd.clickSearchButton();
 		srchprd.verifySearchedProducts();
 		srchprd.verifySearchedProductsList();
-		
-		
+	}
+	@Test(priority=10)
+	public void verifyHomeSubscriptionTC10() 
+	{
+	
 		//Test Case10
+		VerifySubsHmPg vsubshmpg=new VerifySubsHmPg(driver);	
+		
 		vsubshmpg.verifyTextSubs();
 		vsubshmpg.enterEmail("shalini@yahoo.com");
 		vsubshmpg.clickArrow();
-		
-				
+	}
+	@Test(priority=11)
+	public void verifyCartSubscriptionTC11() 
+	{
 		//Test Case11
+		VerifySubsCrtPg vsubscrtpg =new VerifySubsCrtPg(driver);				
+		
 		vsubscrtpg.clickCartButton();
 		vsubscrtpg.verifyTextSubs();
 		vsubscrtpg.enterEmail("shikha@gmail.com");
 		vsubscrtpg.clickArrow();
 		vsubscrtpg.verifySuccessMessage();
-		
-		
+	}	
+	@Test(priority=12)
+	public void verifyAddProductsTC12() 
+	{	
 		//Test Case12
+		AddProductsInCart adprdcrt=new AddProductsInCart(driver);	
+		
 		adprdcrt.clickProducts();
 		adprdcrt.firstProduct();
 		adprdcrt.clickContinueShoppingButton();
@@ -206,18 +232,26 @@ WebDriver driver;
 		adprdcrt.clickViewCart();
 		adprdcrt.verifyCartProducts();
 		adprdcrt.verifyPrcQtyTprc();
-		
-		
+	}
+	@Test(priority=13)
+	public void verifyProductQuantityTC13() 
+	{	
 		//Test Case13
+		VerifyProdQtyInCrt vrfyprodqincrt=new VerifyProdQtyInCrt(driver);	
+		
 		vrfyprodqincrt.clickViewCart();
 		vrfyprodqincrt.verifyDetailsPage();
 		vrfyprodqincrt.increaseQuantity();
 		vrfyprodqincrt.clickAddToCartButton();
 		vrfyprodqincrt.clickViewCartButton();
 		vrfyprodqincrt.verifyQuantity();
-		
-		
+	}	
+	@Test(priority=14)
+	public void verifyPlaceOrder1TC14() 
+	{	
 		//Test Case14
+		PlaceOrderRegWhlChkOut plcordwhlchkot=new PlaceOrderRegWhlChkOut(driver); 
+		
 		plcordwhlchkot.addProducts();
 		plcordwhlchkot.clickCartButton();
 		plcordwhlchkot.verifyCartPage();
@@ -256,9 +290,13 @@ WebDriver driver;
 		plcordwhlchkot.clickPayAndConfirm();
 		plcordwhlchkot.verifySuccessMessage();
 		plcordwhlchkot.deleteAccount();
-		
-		
+	}
+	@Test(priority=15)
+	public void verifyPlaceOrder2TC15() 
+	{
 		//Test Case15
+		PlaceOrderRegBefChkOut plcordbefchkot =new PlaceOrderRegBefChkOut(driver);
+				
 		plcordbefchkot.clickSignUpButton();
 		plcordbefchkot.enterYourName("Praveena");
 		plcordbefchkot.enterYourEmail("veena@gmail.com");
@@ -293,9 +331,13 @@ WebDriver driver;
 		plcordbefchkot.clickPayAndConfirm();
 		plcordbefchkot.verifySuccessMessage();
 		plcordbefchkot.deleteAccount();
-		
+	}
+	@Test(priority=16)
+	public void verifyPlaceOrder3TC16() 
+	{	
+		//Test Case16
+		PlaceOrderLoginBefChkOut plcordloginbefchkot=new PlaceOrderLoginBefChkOut(driver);		 
 		 
-		 //Test Case16
 		plcordloginbefchkot.clickSignUpButton();
 		plcordloginbefchkot.enterEmail2("sharanya@gmail.com");
 		plcordloginbefchkot.enterPassword("passwd");
@@ -315,15 +357,25 @@ WebDriver driver;
 		plcordloginbefchkot.clickPayAndConfirm();
 		plcordloginbefchkot.verifySuccessMessage();
 		plcordloginbefchkot.deleteAccount();
-	
+	}
+	@Test(priority=17)
+	public void verifyRemoveProductsTC17() 
+	{
 		//Test Case17
+		RemoveProdsFromCart rmvprdcrt=new RemoveProdsFromCart(driver);	
+		
 		rmvprdcrt.addProducts();
 		rmvprdcrt.clickCartButton();
 		rmvprdcrt.verifyCartPage();
 		rmvprdcrt.clickXButton();
 		rmvprdcrt.verifyRemovedProduct();
-		
+	}
+	@Test(priority=18)
+	public void verifyCategoryTC18() 
+	{
 		//Test Case18
+		ViewCategory vwctgry =new ViewCategory(driver);	
+		
 		vwctgry.verifyCategoryOnLeftSdBar();
 		vwctgry.clickWomen();
 		vwctgry.clickDress();
@@ -331,16 +383,26 @@ WebDriver driver;
 		vwctgry.clickMen();
 		vwctgry.clickJeans();
 		vwctgry.verifyHeadingJeans();
-				
+	}
+	@Test(priority=19)
+	public void verifyBrandTC19() 
+	{
 		//Test Case19
+		ViewBrand vwbrnd=new ViewBrand(driver);	
+	
 		vwbrnd.clickProducts();
 		vwbrnd.verifyBrandOnLeft();
 		vwbrnd.clickBrandName();
 		vwbrnd.verifyBrandProducts();
 		vwbrnd.clickBrandName2();
 		vwbrnd.verifyBrandProducts2();
-		
+	}
+	@Test(priority=20)
+	public void verifyCartAfterLoginTC20() 
+	{	
 		//Test Case20
+		SearchProdsVerfyCartAfterLogin srchprodvrfyaftlogin=new SearchProdsVerfyCartAfterLogin(driver);	
+		
 		srchprodvrfyaftlogin.clickProducts();
 		srchprodvrfyaftlogin.enterItemInSearchbox("dress");
 		srchprodvrfyaftlogin.clickSearchButton();
@@ -353,9 +415,13 @@ WebDriver driver;
 		srchprodvrfyaftlogin.enterPassword("passwd");
 		srchprodvrfyaftlogin.clickLoginButton();
 		srchprodvrfyaftlogin.clickCartButton();
-
-		 		
+	}
+	@Test(priority=21)
+	public void verifyAddReviewTC21() 
+	{
 		//Test Case21
+		AddReview adrev=new AddReview(driver);		 		
+		
 		adrev.clickProducts();
 		adrev.viewProduct();
 		adrev.enterName("Shalini");
@@ -363,16 +429,25 @@ WebDriver driver;
 		adrev.enterReview("Product is good");
 		adrev.clickSubmit();
 		adrev.successMessage();
-		
+	}
+	@Test(priority=22)
+	public void verifyAddRecommendedItemsTC22() 
+	{
 		//Test Case22
+		AddToCartRecommended adcrtrecom=new AddToCartRecommended(driver);	
+	
 		adcrtrecom.scrollDown();
 		adcrtrecom.verifyRecommendedItemsVisible();
 		adcrtrecom.clickAddToCart();
 		adcrtrecom.clickViewCart();
 		adcrtrecom.verifyProductDispInCart();
-		
-		
+	}	
+	@Test(priority=23)
+	public void verifyAddressDetailsTC23() 
+	{
 		//Test Case23
+		VerifyAddrDetInChkOut vrfyaddrinchkot=new VerifyAddrDetInChkOut(driver);	
+		
 		vrfyaddrinchkot.clickSignUpButton();
 		vrfyaddrinchkot.enterYourName("Bhakti");
 		vrfyaddrinchkot.enterYourEmail("bhakti@gmail.com");
@@ -405,9 +480,13 @@ WebDriver driver;
 		vrfyaddrinchkot.verifyDeliveryAddress();
 		vrfyaddrinchkot.verifyBillingAddress();
 		vrfyaddrinchkot.deleteAccount();
-		
-		
+	}
+	@Test(priority=24)
+	public void verifyDownloadInvoiceTC24() 
+	{
 		//Test Case24
+		DownldInvAftPurchsOrder dnldinvprchord=new DownldInvAftPurchsOrder(driver);
+		
 		dnldinvprchord.addProducts();
 		dnldinvprchord.clickCartButton();
 		dnldinvprchord.verifyCartPage();
@@ -448,18 +527,42 @@ WebDriver driver;
 		dnldinvprchord.clickDownloadInvoiceButton();
 		dnldinvprchord.clickContinueButton();
 		dnldinvprchord.deleteAccount();
-		
+	}
+	@Test(priority=25)
+	public void verifyScrollUpUsingArrowTC25() 
+	{
 		//Test Case25
+		VerifyScrollUpDownWithArrow vscrlwitharr=new VerifyScrollUpDownWithArrow(driver);
+		
 		vscrlwitharr.scrollDown();
 		vscrlwitharr.verifyTextSubs();
 		vscrlwitharr.scrollUp();
 		vscrlwitharr.verifyFullText();
-		
+	}
+	@Test(priority=26)
+	public void verifyScrollUpWithoutArrowTC26() 
+	{
 		//Test Case26
+		VerifyScrollUpDownWithoutArrow vscrlwoutarr =new VerifyScrollUpDownWithoutArrow(driver);
+		
 		vscrlwoutarr.scrollDown();
 		vscrlwoutarr.verifyTextSubs();
 		vscrlwoutarr.scrollUp();
 		vscrlwoutarr.verifyFullText();
 	}
+	
+	@AfterTest
+	public void closeBrowser()
+	{
+		System.out.println("Inside close");
+		//driver.close();
+	}
+	@AfterSuite
+	public void exitBrowser()
+	{
+		System.out.println("Inside exit");
+		driver.quit();
+	}
+	
 }
 

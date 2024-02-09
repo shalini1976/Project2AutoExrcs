@@ -8,6 +8,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.testng.Assert;
 
 import callingAutomationExercise.CallingAutoExercise;
 
@@ -72,7 +73,7 @@ public class AddProductsInCart extends CallingAutoExercise {
 		contshop.click();
 		System.out.println("Continue Shopping button clicked: Verified");
 	}
-	public void secondProduct() 
+	public void secondProduct()
 	{
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
 		JavascriptExecutor js = (JavascriptExecutor) driver;
@@ -101,66 +102,42 @@ public class AddProductsInCart extends CallingAutoExercise {
 		System.out.println(cartprods1.getText());
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
 		System.out.println(cartprods2.getText());
-		if(cartprods1.isDisplayed() && cartprods2.isDisplayed())
-		{
-			System.out.println("Both the products are added: Verified");
-		}
-		else
-		{
-			System.out.println("Both the products are not added: Failed");
-		}
+
+		Assert.assertTrue(cartprods1.isDisplayed() && cartprods2.isDisplayed());
+		System.out.println(cartprods1.getText()+cartprods2.getText()+" are added to the cart: - Verified");
 	}
 	public void verifyPrcQtyTprc()
 	{
 		System.out.println(desc1.getText());
 		//For Product1
-		String crtprc1=crtprice1.getText();
+		String actualPrice1=crtprice1.getText();
+		String expectedPrc1=prc1;
 		String qty1=qnty1.getText();
 		String totprc1=totalprc1.getText();
 		//Checking price
-		if(prc1.equalsIgnoreCase(crtprc1))
-		{
-			System.out.println("Cart price of product1 is same as product price: Verified");
-		}
-		else
-		{
-			System.out.println("Cart price of product1 is not same as product price: Failed");
-		}
+		Assert.assertEquals(actualPrice1, expectedPrc1);
+		System.out.println("Cart price of product1 is same as product price: Verified");
+
 		//checking total price
-		if(crtprc1.equalsIgnoreCase(totprc1) && qty1.equalsIgnoreCase("1"))
-		{
-			System.out.println("Total price of product1 is correct: Verified");
-		}
-		else
-		{
-			System.out.println("Total price of product1 is incorrect: Failed");
-		}
+		Assert.assertEquals(actualPrice1, totprc1);
+		Assert.assertEquals(qty1, "1");
+		System.out.println("Total price of product1 is correct: Verified");
 		System.out.println("Price, quantity and total price for product1: Verified");
 
 		System.out.println(desc2.getText());
 		//For Product2
-		String crtprc2=crtprice2.getText();
+		String actualPrice2=crtprice2.getText();
+		String expectedPrc2=prc2;
 		String qty2=qnty2.getText();
 		String totprc2=totalprc2.getText();
-		System.out.println("Price2: "+prc2+" Cart price2: "+crtprc2+" Total price2: "+totprc2);
 		//Checking price
-		if(prc2.equalsIgnoreCase(crtprc2))
-		{
-			System.out.println("Cart price of product2 is same as product price: Verified");
-		}
-		else
-		{
-			System.out.println("Cart price of product2 is not same as product price: Failed");
-		}
+		Assert.assertEquals(actualPrice2, expectedPrc2);
+		System.out.println("Cart price of product2 is same as product price: Verified");
+
 		//checking total price
-		if(crtprc2.equalsIgnoreCase(totprc2) && qty2.equalsIgnoreCase("1"))
-		{
-			System.out.println("Total price of product2 is correct: Verified");
-		}
-		else
-		{
-			System.out.println("Total price of product2 is incorrect: Failed");
-		}
+		Assert.assertEquals(actualPrice2, totprc2);
+		Assert.assertEquals(qty2, "1");
+		System.out.println("Total price of product2 is correct: Verified");
 		System.out.println("Price, quantity and total price for product2: Verified");
 		System.out.println("TEST CASE12 COMPLETED SUCCESSFULLY\n");
 	}

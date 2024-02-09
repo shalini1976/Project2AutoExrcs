@@ -6,6 +6,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.testng.Assert;
 
 import callingAutomationExercise.CallingAutoExercise;
 
@@ -28,25 +29,16 @@ public class VerifyAllProductPage extends CallingAutoExercise {
 		products.click();
 		System.out.println("Products Tab clicked");
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
-		if(verifyprodpg.isDisplayed())
-		{
-			System.out.println("User is navigated to ALL PRODUCTS page successfully: - Verified");
-		}
-		else
-		{
-			System.out.println("ALL PRODUCTS page is not visible: Failed");
-		}
 
-
+		String actualText=verifyprodpg.getText();
+		String expectedText ="ALL PRODUCTS";
+		Assert.assertEquals(actualText, expectedText);
+		System.out.println("User is navigated to ALL PRODUCTS page successfully: - Verified");
 	}
 	public void verifyList()
 	{
-		if(prdlist.isDisplayed())
-		{
-			System.out.println(prdlist.getText());
-			System.out.println("Product list is visible: Verified");
-		}
-
+		Assert.assertTrue(prdlist.isDisplayed());
+		System.out.println(prdlist.getText()+" is visible: - Verified");
 	}
 	public void viewProduct()
 	{
@@ -54,14 +46,9 @@ public class VerifyAllProductPage extends CallingAutoExercise {
 		vwprod1.click();
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
 		System.out.println("View Product of first product list is clicked: Verified");
-		if(proddetail.isDisplayed()) {
-			System.out.println(proddetail.getText());
-			System.out.println("Product detail is visible: Verified");
-		}
-		else
-		{
-			System.out.println("Product detail is not visible: Failed");
-		}
+
+		Assert.assertTrue(proddetail.isDisplayed());
+		System.out.println(proddetail.getText()+" is visible: - Verified");
 		System.out.println("TEST CASE8 COMPLETED SUCCESSFULLY\n");
 	}
 

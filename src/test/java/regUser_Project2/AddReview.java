@@ -7,6 +7,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.testng.Assert;
 
 import callingAutomationExercise.CallingAutoExercise;
 
@@ -37,14 +38,11 @@ public class AddReview extends CallingAutoExercise {
 		products.click();
 		System.out.println("Products Tab clicked");
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
-		if(verifyprodpg.isDisplayed())
-		{
-			System.out.println("User is navigated to ALL PRODUCTS page successfully: - Verified");
-		}
-		else
-		{
-			System.out.println("ALL PRODUCTS page is not visible: Failed");
-		}
+
+		String actualText=verifyprodpg.getText();
+		String expectedText ="ALL PRODUCTS";
+		Assert.assertEquals(actualText, expectedText);
+		System.out.println("User is navigated to ALL PRODUCTS page successfully: - Verified");
 	}
 
 	public void viewProduct()
@@ -56,14 +54,8 @@ public class AddReview extends CallingAutoExercise {
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
 		System.out.println("View Product is clicked: Verified");
 
-		if(wrtrev.isDisplayed())
-		{
-			System.out.println("Write Your Review is visible: Verified");
-		}
-		else
-		{
-			System.out.println("Write Your Review is not visible: Failed");
-		}
+		Assert.assertTrue(wrtrev.isDisplayed());
+		System.out.println(wrtrev.getText()+" is visible: - Verified");
 	}
 
 	public void enterName(String rvnm)
@@ -85,14 +77,9 @@ public class AddReview extends CallingAutoExercise {
 	}
 	public void successMessage()
 	{
-		if(revmsg.isDisplayed())
-		{
-			System.out.println("success message 'Thank you for your review.' is visible: Verified");
-		}
-		else
-		{
-			System.out.println("success message 'Thank you for your review.' is not visible: Failed");
-		}
+		Assert.assertTrue(revmsg.isDisplayed());
+		System.out.println("success message '"+revmsg.getText()+".' is visible: - Verified");
+
 		System.out.println("TEST CASE21 COMPLETED SUCCESSFULLY\n");
 	}
 }

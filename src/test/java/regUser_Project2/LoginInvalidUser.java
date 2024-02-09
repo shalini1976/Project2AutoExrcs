@@ -6,6 +6,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.testng.Assert;
 
 import callingAutomationExercise.CallingAutoExercise;
 
@@ -29,15 +30,10 @@ public class LoginInvalidUser extends CallingAutoExercise {
 	{
 		signup.click();
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
-		if(verifylogin.isDisplayed())
-		{
-			System.out.println("Login to your account is visible: - Verified");
-		}
-		else
-		{
-			System.out.println("Login to your account is not visible: - Verified");
-		}
-
+		String actualText=verifylogin.getText();
+		String expectedText ="Login to your account";
+		Assert.assertEquals(actualText, expectedText);
+		System.out.println("Login to your account is visible: - Verified");
 	}
 	public void enterEmail3(String mail3)
 	{
@@ -58,14 +54,8 @@ public class LoginInvalidUser extends CallingAutoExercise {
 	public void verifyLoginError()
 	{
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
-		if(texterror.isDisplayed())
-		{
-			System.out.println("Error message is visible: - Verified");
-		}
-		else
-		{
-			System.out.println("Error message is not visible: - Failed");
-		}
+		Assert.assertTrue(texterror.isDisplayed());
+		System.out.println("Error message is visible: - Verified");
 		System.out.println("TEST CASE3 COMPLETED SUCCESSFULLY\n");
 	}
 

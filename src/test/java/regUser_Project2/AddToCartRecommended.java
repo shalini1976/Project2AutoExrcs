@@ -7,6 +7,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.testng.Assert;
 
 import callingAutomationExercise.CallingAutoExercise;
 
@@ -32,15 +33,10 @@ public class AddToCartRecommended extends CallingAutoExercise {
 	}
 	public void verifyRecommendedItemsVisible()
 	{
-		System.out.println(recomhead.getText());
-		if(recomhead.isDisplayed())
-		{
-			System.out.println("RECOMMENDED ITEMS are visible: Verified");
-		}
-		else
-		{
-			System.out.println("RECOMMENDED ITEMS are not visible: Failed");
-		}
+		String actualText=recomhead.getText();
+		String expectedText ="RECOMMENDED ITEMS";
+		Assert.assertEquals(actualText, expectedText);
+		System.out.println(recomhead.getText()+" are visible: Verified");
 	}
 	public void clickAddToCart()
 	{
@@ -55,15 +51,8 @@ public class AddToCartRecommended extends CallingAutoExercise {
 	}
 	public void verifyProductDispInCart()
 	{
-		System.out.println(crtdetail.getText());
-		if(crtdetail.isDisplayed())
-		{
-			System.out.println("Product is displayed in cart: Verified");
-		}
-		else
-		{
-			System.out.println("Product is not displayed in cart: Failed");
-		}
+		Assert.assertTrue(crtdetail.isDisplayed());
+		System.out.println(crtdetail.getText()+" is displayed un cart: - Verified");
 		System.out.println("TEST CASE22 COMPLETED SUCCESSFULLY\n");
 	}
 }

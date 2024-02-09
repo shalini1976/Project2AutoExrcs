@@ -6,6 +6,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.testng.Assert;
 
 import callingAutomationExercise.CallingAutoExercise;
 
@@ -51,7 +52,7 @@ public RegisterUser(WebDriver ldriver)
 @FindBy(xpath="//h2") WebElement verifyacctcrtd;
 @FindBy(xpath="//a[@data-qa='continue-button']") WebElement contbutton;
 @FindBy(xpath="//div[@class='container']/child::div/child::div/following-sibling::div/child::div/child::ul/child::li[10]") WebElement textlogin;
-@FindBy(xpath="//div[@class='container']/child::div/child::div/following-sibling::div/child::div/child::ul/child::li[5]") WebElement delete;
+@FindBy(xpath="//div[@class='container']/child::div/child::div/following-sibling::div/child::div/child::ul/child::li[5]/child::a") WebElement delete;
 @FindBy(xpath="//h2") WebElement textdeleted;
 @FindBy(xpath="//a[text()='Continue']") WebElement contbtn;
 
@@ -59,15 +60,11 @@ public void clickSignUpButton()
 {
 	signup.click();
 	driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
-	if(verifysignup.isDisplayed())
-	{
-		System.out.println("New User Signup! visible: - Verified");
-	}
-	else
-	{
-		System.out.println("New User Signup! not visible: Failed");
-	}
 
+	String actualText=verifysignup.getText();
+	String expectedText ="New User Signup!";
+	Assert.assertEquals(actualText, expectedText);
+	System.out.println("New User Signup! is visible: Verified");
 }
 
 public void enterName(String nm)
@@ -90,15 +87,12 @@ public void submitSignUp()
 public void verifyEnterAccountInformation()
 {
 	driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
-	if(stitle.isDisplayed())
-	{
-		System.out.println("Enter Account Information is visible: - Verified");
+
+	String actualText=stitle.getText();
+	String expectedText ="ENTER ACCOUNT INFORMATION";
+	Assert.assertEquals(actualText, expectedText);
+	System.out.println("ENTER ACCOUNT INFORMATION is visible: Verified");
 	}
-	else
-	{
-		System.out.println("Enter Account Information is not visible: Failed");
-	}
-}
 public void selectGenderTitle()
 {
 	title.click();
@@ -172,44 +166,33 @@ public void clickCreateAccountVerify()
 {
 	crtaccnt.click();
 	driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
-	if(verifyacctcrtd.isDisplayed())
-	{
-		System.out.println("Account Created! visible: - Verified");
-	}
-	else
-	{
-		System.out.println("Account Created is not visible: - Failed");
-	}
+
+	String actualText=verifyacctcrtd.getText();
+	String expectedText ="ACCOUNT CREATED!";
+	Assert.assertEquals(actualText, expectedText);
+	System.out.println("ACCOUNT CREATED! is visible: Verified");
 }
 public void clickContinueButton()
 {
 	contbutton.click();
+	driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
 }
 public void verifyUserName()
 {
-	if(textlogin.isDisplayed())
-	{
-		System.out.println("Logged in as username is visible: - Verified");
-
-	}
-	else
-	{
-		System.out.println("Logged in as username is not visible: - Failed");
-	}
+	driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
+	Assert.assertTrue(textlogin.isDisplayed());
+	System.out.println(textlogin.getText()+" is visible: - Verified");
 }
 public void deleteAccount()
 {
+	driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
 	delete.click();
+	driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
+	String actualText=textdeleted.getText();
+	String expectedText ="ACCOUNT DELETED!";
+	Assert.assertEquals(actualText, expectedText);
+	System.out.println("ACCOUNT DELETED!");
 
-	if(textdeleted.isDisplayed())
-	{
-		System.out.println("Account Deleted is visible: - Verified");
-
-	}
-	else
-	{
-		System.out.println("Account Deleted is not visible: - Failed");
-	}
 	driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
 	contbtn.click();
 	System.out.println("Continue Button Clicked");

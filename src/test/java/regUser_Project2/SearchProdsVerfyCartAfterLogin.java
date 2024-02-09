@@ -161,5 +161,5 @@ public class SearchProdsVerfyCartAfterLogin extends CallingAutoExercise {
 	}
 //Click Cart button and verify same products are listed in cart
 
- 
+
 }

@@ -38,16 +38,10 @@ public class ContactUs	extends CallingAutoExercise {
 	}
 	public void verifyGetInTouch()
 	{
-
-		if(verifygetintch.isDisplayed())
-		{
-			System.out.println("Get In Touch is visible: - Verified");
-
-		}
-		else
-		{
-			System.out.println("Get In Touch is not visible: Failed");
-		}
+		String actualText=verifygetintch.getText();
+		String expectedText ="GET IN TOUCH";
+		Assert.assertEquals(actualText, expectedText);
+		System.out.println("Get In Touch is visible: - Verified");
 	}
 	public void enterName(String nm)
 	{
@@ -92,14 +86,8 @@ public class ContactUs	extends CallingAutoExercise {
 	}
 	public void verifySuccessMessage()
 	{
-		if(successmsg.isDisplayed())
-		{
-			System.out.println("Success message verified! - Passed");
-		}
-		else
-		{
-			System.out.println("Success message couldn't verified - Failed!");
-		}
+		Assert.assertTrue(successmsg.isDisplayed());
+		System.out.println(successmsg.getText()+" is visible: - Verified");
 	}
 	public void clickHome()
 	{

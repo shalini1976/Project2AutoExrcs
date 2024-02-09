@@ -6,6 +6,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.testng.Assert;
 
 import callingAutomationExercise.CallingAutoExercise;
 
@@ -81,15 +82,10 @@ public class VerifyAddrDetInChkOut extends CallingAutoExercise {
 	{
 		signup.click();
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
-		if(verifysignup.isDisplayed())
-		{
-			System.out.println("New User Signup! visible: - Verified");
-		}
-		else
-		{
-			System.out.println("New User Signup! not visible: Failed");
-		}
-
+		String actualText=verifysignup.getText();
+		String expectedText ="New User Signup!";
+		Assert.assertEquals(actualText, expectedText);
+		System.out.println("New User Signup! visible: - Verified");
 	}
 
 	public void enterYourName(String nm)
@@ -112,14 +108,10 @@ public class VerifyAddrDetInChkOut extends CallingAutoExercise {
 	public void verifyEnterAcctInformation()
 	{
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
-		if(stitle.isDisplayed())
-		{
-			System.out.println("Enter Account Information is visible: - Verified");
-		}
-		else
-		{
-			System.out.println("Enter Account Information is not visible: Failed");
-		}
+		String actualText=stitle.getText();
+		String expectedText ="ENTER ACCOUNT INFORMATION";
+		Assert.assertEquals(actualText, expectedText);
+		System.out.println("ENTER ACCOUNT INFORMATION is visible: Verified");
 	}
 	public void selectGenderTtl()
 	{
@@ -185,18 +177,14 @@ public class VerifyAddrDetInChkOut extends CallingAutoExercise {
 	{
 		mobileno.sendKeys(mbno);
 	}
-		public void clickCreateAcctVerify()
+	public void clickCreateAcctVerify()
 	{
 		crtaccnt.click();
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
-		if(verifyacctcrtd.isDisplayed())
-		{
-			System.out.println("Account Created! visible: - Verified");
-		}
-		else
-		{
-			System.out.println("Account Created is not visible: - Failed");
-		}
+		String actualText=verifyacctcrtd.getText();
+		String expectedText ="ACCOUNT CREATED!";
+		Assert.assertEquals(actualText, expectedText);
+		System.out.println("ACCOUNT CREATED! visible: - Verified");
 	}
 
 	public void clickContinueBtn()
@@ -205,15 +193,8 @@ public class VerifyAddrDetInChkOut extends CallingAutoExercise {
 	}
 	public void verifyUserName()
 	{
-		if(textlogin.isDisplayed())
-		{
-			System.out.println("Logged in as username is visible: - Verified");
-
-		}
-		else
-		{
-			System.out.println("Logged in as username is not visible: - Failed");
-		}
+		Assert.assertTrue(textlogin.isDisplayed());
+		System.out.println(textlogin.getText()+" is visible: - Verified");
 	}
 	public void addProducts()
 	{
@@ -234,14 +215,8 @@ public class VerifyAddrDetInChkOut extends CallingAutoExercise {
 	}
 	public void verifyCartPage()
 	{
-		if(vrfycrtpg.isDisplayed())
-		{
-			System.out.println("Cart Page is displayed: Verified");
-		}
-		else
-		{
-			System.out.println("Cart Page is not displayed: Failed");
-		}
+		Assert.assertTrue(vrfycrtpg.isDisplayed());
+		System.out.println(vrfycrtpg.getText()+" is displayed: - Verified");
 	}
 	public void proceedToCheckout()
 	{
@@ -263,15 +238,10 @@ public class VerifyAddrDetInChkOut extends CallingAutoExercise {
 	{
 		delete.click();
 
-		if(textdeleted.isDisplayed())
-		{
-			System.out.println("Account Deleted is visible: - Verified");
-
-		}
-		else
-		{
-			System.out.println("Account Deleted is not visible: - Failed");
-		}
+		String actualText=textdeleted.getText();
+		String expectedText ="ACCOUNT DELETED!";
+		Assert.assertEquals(actualText, expectedText);
+		System.out.println(textdeleted.getText()+" is displayed: Verified");
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
 		contbtn.click();
 		System.out.println("Continue Button Clicked");

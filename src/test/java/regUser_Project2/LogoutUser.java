@@ -32,15 +32,10 @@ public class LogoutUser extends CallingAutoExercise{
 	{
 		signup.click();
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
-		if(verifylogin.isDisplayed())
-		{
-			System.out.println("Login to your account is visible: - Verified");
-		}
-		else
-		{
-			System.out.println("Login to your account is not visible: - Verified");
-		}
-
+		String actualText=verifylogin.getText();
+		String expectedText ="Login to your account";
+		Assert.assertEquals(actualText, expectedText);
+		System.out.println("Login to your account is visible: - Verified");
 	}
 	public void enterEmail2(String mail2)
 	{
@@ -61,14 +56,9 @@ public class LogoutUser extends CallingAutoExercise{
 	public void verifyLogin()
 	{
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
-		if(vrfylogin.isDisplayed())
-		{
-			System.out.println("Logged in as username is visible: - Verified");
-		}
-		else
-		{
-			System.out.println("Logged in as username is not visible: - Failed");
-		}
+		Assert.assertTrue(vrfylogin.isDisplayed());
+		System.out.println(vrfylogin.getText()+" is visible: - Verified");
+
 	}
 	public void clickLogoutButton()
 	{

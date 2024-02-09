@@ -6,6 +6,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.testng.Assert;
 
 import callingAutomationExercise.CallingAutoExercise;
 
@@ -46,14 +47,8 @@ public class RemoveProdsFromCart extends CallingAutoExercise {
 	}
 	public void verifyCartPage()
 	{
-		if(vrfycrtpg.isDisplayed())
-		{
-			System.out.println("Cart Page is displayed: Verified");
-		}
-		else
-		{
-			System.out.println("Cart Page is not displayed: Failed");
-		}
+		Assert.assertTrue(vrfycrtpg.isDisplayed());
+		System.out.println(vrfycrtpg.getText()+" is visible: - Verified");
 	}
 	public void clickXButton()
 	{
@@ -64,14 +59,9 @@ public class RemoveProdsFromCart extends CallingAutoExercise {
 	public void verifyRemovedProduct()
 	{
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
-		if(!cartprods1.isDisplayed())
-		{
-			System.out.println("Product1 not removed from Cart: Failed");
-		}
-		else
-		{
-			System.out.println("Product1 removed from Cart: Verified");
-		}
+		Assert.assertTrue(!cartprods1.isDisplayed());
+		System.out.println("Product1 removed from Cart: Verified");
+
 		System.out.println("TEST CASE17 COMPLETED SUCCESSFULLY\n");
 	}
 

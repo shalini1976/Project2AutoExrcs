@@ -7,6 +7,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.testng.Assert;
 
 import callingAutomationExercise.CallingAutoExercise;
 
@@ -35,14 +36,10 @@ public class VerifyScrollUpDownWithoutArrow extends CallingAutoExercise {
 	}
 	public void verifyTextSubs()
 	{
-		if(substxt.isDisplayed())
-		{
-			System.out.println("Text 'SUBSCRIPTION' is displayed: Verified");
-		}
-		else
-		{
-			System.out.println("Text 'SUBSCRIPTION' is not displayed: Failed");
-		}
+		String actualText=substxt.getText();
+		String expectedText ="SUBSCRIPTION";
+		Assert.assertEquals(actualText, expectedText);
+		System.out.println("Text 'SUBSCRIPTION' is displayed: Verified");
 	}
 	public void scrollUp()
 	{
@@ -56,14 +53,9 @@ public class VerifyScrollUpDownWithoutArrow extends CallingAutoExercise {
 	}
 	public void verifyFullText()
 	{
-		if(fulltxt.isDisplayed())
-		{
-			System.out.println("Page is scrolled up and 'Full-Fledged practice website for Automation Engineers' text is visible: Verified");
-		}
-		else
-		{
-			System.out.println("Page is not scrolled up and 'Full-Fledged practice website for Automation Engineers' text is not visible: Failed");
-		}
+		Assert.assertTrue(fulltxt.isDisplayed());
+		System.out.println("Page is scrolled up and '"+fulltxt.getText()+"' is visible: - Verified");
+
 		System.out.println("TEST CASE26 COMPLETED SUCCESSFULLY\n");
 	}
 

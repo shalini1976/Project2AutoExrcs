@@ -7,6 +7,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.testng.Assert;
 
 import callingAutomationExercise.CallingAutoExercise;
 
@@ -39,14 +40,8 @@ public class ViewBrand extends CallingAutoExercise {
 		js.executeScript("arguments[0].scrollIntoView();", verifybrand);
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
 
-		if(verifybrand.isDisplayed())
-		{
-			System.out.println("BRANDS is visible on left side: Verified");
-		}
-		else
-		{
-			System.out.println("BRANDS is not visible on left side: Failed");
-		}
+		Assert.assertTrue(verifybrand.isDisplayed());
+		System.out.println(verifybrand.getText()+" is visible on left side: - Verified");
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(40));
 	}
 	public void clickBrandName()
@@ -54,23 +49,16 @@ public class ViewBrand extends CallingAutoExercise {
 		clkbrndnm1.click();
 		System.out.println("Brand name clicked");
 	}
-	public void verifyBrandProducts() throws InterruptedException
+	public void verifyBrandProducts()
 	{
 		//JavascriptExecutor js = (JavascriptExecutor) driver;
 		//js.executeScript("arguments[0].scrollIntoView();", clkbrndnm2);
 		//driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
-		Thread.sleep(2000);
-		System.out.println(brndprods1.getText());
-		if(brndprods1.isDisplayed())
-		{
-			System.out.println("User is navigated to brand page and brand products are displayed: Verified");
-		}
-		else
-		{
-			System.out.println("User is not navigated to brand page and brand products are not displayed: Failed");
-		}
-		//driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
-		Thread.sleep(3000);
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
+		Assert.assertTrue(brndprods1.isDisplayed());
+		System.out.println(brndprods1.getText()+" is visible: - Verified");
+		System.out.println("User is navigated to brand page and brand products are displayed: Verified");
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
 	}
 	public void clickBrandName2()
 	{
@@ -84,14 +72,10 @@ public class ViewBrand extends CallingAutoExercise {
 	public void verifyBrandProducts2()
 	{
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
-		if(brndprods2.isDisplayed())
-		{
-			System.out.println("User is navigated to brand page and brand products are displayed: Verified");
-		}
-		else
-		{
-			System.out.println("User is not navigated to brand page and brand products are not displayed: Failed");
-		}
+		Assert.assertTrue(brndprods2.isDisplayed());
+		System.out.println(brndprods1.getText()+" is visible: - Verified");
+		System.out.println("User is navigated to brand page and brand products are displayed: Verified");
+
 		System.out.println("TEST CASE19 COMPLETED SUCCESSFULLY\n");
 	}
 }

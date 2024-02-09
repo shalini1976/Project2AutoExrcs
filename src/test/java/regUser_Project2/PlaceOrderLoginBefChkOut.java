@@ -6,6 +6,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.testng.Assert;
 
 import callingAutomationExercise.CallingAutoExercise;
 
@@ -66,15 +67,10 @@ public class PlaceOrderLoginBefChkOut extends CallingAutoExercise{
 	{
 		signup.click();
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
-		if(verifylogin.isDisplayed())
-		{
-			System.out.println("Login to your account is visible: - Verified");
-		}
-		else
-		{
-			System.out.println("Login to your account is not visible: - Verified");
-		}
-
+		String actualText=verifylogin.getText();
+		String expectedText ="Login to your account";
+		Assert.assertEquals(actualText, expectedText);
+		System.out.println("Login to your account is visible: - Verified");
 	}
 	public void enterEmail2(String mail2)
 	{
@@ -95,14 +91,9 @@ public class PlaceOrderLoginBefChkOut extends CallingAutoExercise{
 	public void verifyLogin()
 	{
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
-		if(vrfylogin.isDisplayed())
-		{
-			System.out.println("Logged in as username is visible: - Verified");
-		}
-		else
-		{
-			System.out.println("Logged in as username is not visible: - Failed");
-		}
+		Assert.assertTrue(vrfylogin.isDisplayed());
+		System.out.println(vrfylogin.getText()+" is visible: - Verified");
+
 	}
 	public void addProducts()
 	{
@@ -123,14 +114,8 @@ public class PlaceOrderLoginBefChkOut extends CallingAutoExercise{
 	}
 	public void verifyCartPage()
 	{
-		if(vrfycrtpg.isDisplayed())
-		{
-			System.out.println("Cart Page is displayed: Verified");
-		}
-		else
-		{
-			System.out.println("Cart Page is not displayed: Failed");
-		}
+		Assert.assertTrue(vrfycrtpg.isDisplayed());
+		System.out.println(vrfycrtpg.getText()+" is displayed: - Verified");
 	}
 	public void proceedToCheckout()
 	{
@@ -140,11 +125,9 @@ public class PlaceOrderLoginBefChkOut extends CallingAutoExercise{
 	}
 	public void verifyAddressReviewDetails()
 	{
-		if(billaddrname.isDisplayed() && dlvryaddrname.isDisplayed())
-		{
+		Assert.assertTrue(billaddrname.isDisplayed() && dlvryaddrname.isDisplayed());
 		System.out.println("Delivery & Billing Address Verified");
 		System.out.println("Order Reviewed");
-		}
 	}
 	public void enterDescriptionPlaceOrder(String cmnt)
 	{
@@ -186,15 +169,10 @@ public class PlaceOrderLoginBefChkOut extends CallingAutoExercise{
 	{
 		delete.click();
 
-		if(textdeleted.isDisplayed())
-		{
-			System.out.println("Account Deleted is visible: - Verified");
-
-		}
-		else
-		{
-			System.out.println("Account Deleted is not visible: - Failed");
-		}
+		String actualText=textdeleted.getText();
+		String expectedText ="ACCOUNT DELETED!";
+		Assert.assertEquals(actualText, expectedText);
+		System.out.println(textdeleted.getText()+" is displayed: Verified");
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
 		contbtn.click();
 		System.out.println("Continue Button Clicked");
